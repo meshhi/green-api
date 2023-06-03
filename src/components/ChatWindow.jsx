@@ -2,11 +2,13 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import ChatItem from "./ChatItem";
 import CreateChat from "./CreateChat";
+import Loader from "./Loader";
 
 const ChatWindow = () => {
   const [chats, setChats] = useState([])
+  const [chatsAreSet, setChatsAreSet] = useState(false);
   const [chatContent, setChatContent] = useState([]);
-  const [modalOpen, setModalOpen] = useState(false)
+
 
   useEffect(() => {
     const fetchChats = async() => {
@@ -23,6 +25,7 @@ const ChatWindow = () => {
       }
     }
 
+    setChatsAreSet(false);
     fetchChats()
       .then((data) => {
         setChats((prev) => {
@@ -31,6 +34,7 @@ const ChatWindow = () => {
             name: chatObj.name
           }))
         });
+        setChatsAreSet(true);
       })
       .catch((err) => {
         setChats((prev) => {
@@ -42,11 +46,14 @@ const ChatWindow = () => {
   return(
     <>
       <div className="chat-window">
-        <CreateChat></CreateChat>
         <div className="chat-list">
-        {chats.map((chat) => {
-            return <ChatItem key={chat.id} id={chat.id} name={chat.name} setChatContent={setChatContent}></ChatItem>
-          })}
+          <CreateChat disabled={chatsAreSet}></CreateChat>
+          {chatsAreSet 
+            ? chats.map((chat) => {
+              return <ChatItem key={chat.id} id={chat.id} name={chat.name} setChatContent={setChatContent}></ChatItem>
+            })
+            : <Loader></Loader>
+          }
         </div>
         <div className="chat-content">
           {chatContent.map((chat) => {

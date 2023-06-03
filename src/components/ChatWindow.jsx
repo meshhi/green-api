@@ -70,7 +70,11 @@ const ChatWindow = () => {
                 )
               })
             : <Loader></Loader>
-        }
+          }
+          <div className="chat-content__input_message">
+            <input className="input_message__field" type="text" name="" id="" placeholder="Текст сообщения..."></input>
+            <button className="input_message__button">Отправить</button>
+          </div>
         </div>
       </div>
     </>

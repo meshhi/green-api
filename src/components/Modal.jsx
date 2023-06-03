@@ -17,6 +17,7 @@ const Modal =({ message, isOpen, onClose, children, callback })=> {
             const regex = /^([0-9])+?$/g;
             if (contactRef.current.value.match(regex)) {
               callback(contactRef.current.value);
+              onClose(prev => !prev);
             };
           }
         }>Создать чат</button>

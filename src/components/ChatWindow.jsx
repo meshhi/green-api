@@ -11,7 +11,7 @@ const ChatWindow = () => {
   const [chatContentIsSet, setChatContentIsSet] = useState(false);
 
   const createNewChat = (contactId) => {
-    setChats((prev) => [{ id: contactId, name: contactId }, ...prev]);
+    setChats((prev) => [{ id: `${contactId}@c.us`, name: contactId }, ...prev]);
     console.log('new chat added ' + contactId)
   };
 
@@ -39,8 +39,6 @@ const ChatWindow = () => {
             name: chatObj.name
           }))
         });
-        console.log("CHATS ARE: ")
-        console.log(chats)
         setChatsAreSet(true);
       })
       .catch((err) => {

@@ -10,7 +10,6 @@ const CreateChat = ({disabled, callback}) => {
       className="create-chat"
       disabled={!disabled}
       onClick={() => {
-        console.log("Creating chat");
         setModalOpen(true)
       }}
       >

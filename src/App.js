@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import ChatWindow from './components/ChatWindow';
 import { useNavigate } from 'react-router';
 import { useEffect } from 'react';

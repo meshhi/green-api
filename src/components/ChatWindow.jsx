@@ -10,6 +10,11 @@ const ChatWindow = () => {
   const [chatContent, setChatContent] = useState([]);
   const [chatContentIsSet, setChatContentIsSet] = useState(false);
 
+  const createNewChat = (contactId) => {
+    setChats((prev) => [{ id: contactId, name: contactId }, ...prev]);
+    console.log('new chat added ' + contactId)
+  };
+
   useEffect(() => {
     const fetchChats = async() => {
       try {
@@ -34,6 +39,8 @@ const ChatWindow = () => {
             name: chatObj.name
           }))
         });
+        console.log("CHATS ARE: ")
+        console.log(chats)
         setChatsAreSet(true);
       })
       .catch((err) => {
@@ -47,7 +54,7 @@ const ChatWindow = () => {
     <>
       <div className="chat-window">
         <div className="chat-list">
-          <CreateChat disabled={chatsAreSet}></CreateChat>
+          <CreateChat disabled={chatsAreSet} callback={createNewChat}></CreateChat>
           {chatsAreSet 
             ? chats.map((chat) => {
               return <ChatItem key={chat.id} id={chat.id} name={chat.name} setChatContent={setChatContent} setChatContentIsSet={setChatContentIsSet}></ChatItem>

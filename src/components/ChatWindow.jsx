@@ -8,7 +8,7 @@ const ChatWindow = () => {
   const [chats, setChats] = useState([])
   const [chatsAreSet, setChatsAreSet] = useState(false);
   const [chatContent, setChatContent] = useState([]);
-
+  const [chatContentIsSet, setChatContentIsSet] = useState(false);
 
   useEffect(() => {
     const fetchChats = async() => {
@@ -50,19 +50,22 @@ const ChatWindow = () => {
           <CreateChat disabled={chatsAreSet}></CreateChat>
           {chatsAreSet 
             ? chats.map((chat) => {
-              return <ChatItem key={chat.id} id={chat.id} name={chat.name} setChatContent={setChatContent}></ChatItem>
+              return <ChatItem key={chat.id} id={chat.id} name={chat.name} setChatContent={setChatContent} setChatContentIsSet={setChatContentIsSet}></ChatItem>
             })
             : <Loader></Loader>
           }
         </div>
         <div className="chat-content">
-          {chatContent.map((chat) => {
-            return(
-              <div>
-                {chat.type} {chat.textMessage}
-              </div>
-            )
-          })}
+          {chatContentIsSet
+            ? chatContent.map((chat) => {
+                return(
+                  <div>
+                    {chat.type} {chat.textMessage}
+                  </div>
+                )
+              })
+            : <Loader></Loader>
+        }
         </div>
       </div>
     </>

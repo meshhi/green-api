@@ -80,6 +80,7 @@
 .chat-content {
   flex: 3;
   display: flex;
+  position: relative;
   flex-direction: column;
   background-color: blue;
 }

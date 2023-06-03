@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const ChatItem = ({id, name, setChatContent}) => {
+const ChatItem = ({id, name, setChatContent, setChatContentIsSet}) => {
   const getChatContent = (chatId, msgCount = 100) => {
     const fetchChatContent = async() => {
       try {
@@ -20,16 +20,19 @@ const ChatItem = ({id, name, setChatContent}) => {
       }
     }
 
+    setChatContentIsSet(false);
     fetchChatContent()
       .then(data => {
         setChatContent(prev => {
           return [...data.data]
         })
+        setChatContentIsSet(true);
       })
       .catch(err => {
         setChatContent(prev => {
-          return []
+          return [`${err}`]
         })
+        setChatContentIsSet(true);
       });
   };
 

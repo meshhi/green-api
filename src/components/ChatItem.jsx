@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const ChatItem = ({id, name, setChatContent, setChatContentIsSet}) => {
+const ChatItem = ({id, name, setChatContent, setChatContentIsSet, setCurrentChatId}) => {
   const getChatContent = (chatId, msgCount = 100) => {
     const fetchChatContent = async() => {
       try {
@@ -14,6 +14,7 @@ const ChatItem = ({id, name, setChatContent, setChatContentIsSet}) => {
           },
         }
         const data = await axios(config);
+        setCurrentChatId(chatId);
         return data;
       } catch (err) {
         return Promise.reject(err);
@@ -38,7 +39,7 @@ const ChatItem = ({id, name, setChatContent, setChatContentIsSet}) => {
 
   return(
     <div className="chat-item" data-id={id} onClick={(event) => {
-      getChatContent(event.target.dataset.id)
+      getChatContent(event.target.dataset.id);
     }}>{name}</div>
   )
 }

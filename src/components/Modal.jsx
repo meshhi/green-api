@@ -13,7 +13,13 @@ const Modal =({ message, isOpen, onClose, children, callback })=> {
           Введите номер контакта:
           <input type="text" name="" id="" ref={contactRef}/>
         </label>
-        <button onClick={() => callback(contactRef.current.value)}>Создать чат</button>
+        <button onClick={() => {
+            const regex = /^([0-9])+?$/g;
+            if (contactRef.current.value.match(regex)) {
+              callback(contactRef.current.value);
+            };
+          }
+        }>Создать чат</button>
       </div>
     </div>
     

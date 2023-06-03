@@ -6,7 +6,11 @@ const Modal =({ message, isOpen, onClose, children, callback })=> {
   const contactRef = useRef();
 
   return isOpen ? ReactDOM.createPortal(
-    <div className="modal">
+    <div className="modal" onClick={(event) => {
+      if (event.target.classList.contains('modal')) {
+        onClose(prev => !prev);
+      }
+    }}>
       <div className="modal-inner">
         <button className="close-modal" onClick={() => onClose(prev => !prev)}>Close modal</button>
         <label>

@@ -2,7 +2,7 @@ import Modal from "./Modal";
 import { useState, useEffect } from "react";
 
 const CreateChat = ({disabled, callback}) => {
-  const [modalOpen, setModalOpen] = useState(false)
+  const [modalOpen, setModalOpen] = useState(false);
 
   return(
   <>

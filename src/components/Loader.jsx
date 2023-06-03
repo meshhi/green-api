@@ -1,7 +1,7 @@
 const Loader = () => {
   return(
     <div className="loader">
-      <div class="loader-5 center"><span></span></div>
+      <div className="loader-5 center"><span></span></div>
     </div>
   )
 }

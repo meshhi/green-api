@@ -14,11 +14,9 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-      </header>
-      <section>
+      <div className="chat-window">
         <ChatWindow></ChatWindow>
-      </section>
+      </div>
     </div>
   );
 }

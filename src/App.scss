@@ -2,11 +2,8 @@ $base-color: #eae6df;
 
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+	background: linear-gradient(180deg, rgb(0, 168, 132) 0%, rgb(0, 168, 132) 20%, rgba(209,215,219,1) 20%);
+	height: 100vh;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -49,16 +46,22 @@ $base-color: #eae6df;
 }
 
 .chat-window {
-  position: absolute;
-  top: 2rem;
-  bottom: 2rem;
-  left: 2rem;
-  right: 2rem;
-  display: flex;
-  flex-direction: row;
-  border-color: black;
-  border-style: solid;
-  background-color: $base-color;
+  position: relative;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(176, 176, 176, 0);
+	overflow: hidden;
+}
+
+.inner-chat-window {
+	margin: 19px auto;
+	max-width: 1600px;
+	height: calc(100vh - 38px);
+	display: flex;
+	flex-direction: row;
+	overflow: hidden;
 }
 
 .chat-list {

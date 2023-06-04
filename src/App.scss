@@ -2,6 +2,9 @@ $base-color: #eae6df;
 $background-color: #fff;
 $grey: #f0f2f5;
 $loader-color: red;
+$msg_out: #d9fdd3;
+$msg_in: #d8d8d8;
+$msg_error: red;
 
 .App {
   text-align: center;
@@ -39,15 +42,6 @@ $loader-color: red;
   }
 }
 
-.create-chat {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  min-height: 2rem;
-  background-color: $grey;
-}
-
 .chat-window {
   position: relative;
   top: 0;
@@ -75,9 +69,24 @@ $loader-color: red;
 	display: flex;
 	flex-direction: column;
 	background-color: $background-color;
+	overflow: hidden;
+}
+
+.create-chat {
+	flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: $grey;
+}
+
+.create-chat:hover {
+	cursor: pointer;
 }
 
 .chat-list {
+	flex: 9;
 	display: flex;
 	position: relative;
 	flex-direction: column;
@@ -118,16 +127,25 @@ $loader-color: red;
 }
 
 .chat-text-item {
-	// display: flex;
-	// flex-direction: row;
-	// justify-content: center;
-	// align-items: center;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
 	// min-height: 20%;
 }
 
 .outgoing {
 	// margin-left: 5rem;
-	// background-color: grey;
+	background-color: $msg_out;
+}
+
+.incomming {
+	// margin-left: 5rem;
+	background-color: $msg_in;
+}
+
+.error {
+	background-color: $msg_error;
 }
 
 .input_message {

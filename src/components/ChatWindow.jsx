@@ -48,7 +48,10 @@ const ChatWindow = () => {
       })
       .catch(err => {
         setChatContent(prev => {
-          return [`${err}`]
+          return [{
+            type: 'error',
+            textMessage: err.message
+          }]
         })
         setChatContentIsSet(true);
       });
@@ -69,7 +72,6 @@ const ChatWindow = () => {
       getChatContent(currentChatId);
       return data;
     } catch (err) {
-      console.log(err);
       setChatContent([{
         type: "error",
         textMessage: err.message
@@ -117,9 +119,7 @@ const ChatWindow = () => {
     <>
       <div className="inner-chat-window">
         <div className="left-bar">
-          <div className="chat-panel">
-            <CreateChat disabled={chatsAreSet} callback={createNewChat}></CreateChat>
-          </div>
+          <CreateChat disabled={chatsAreSet} callback={createNewChat}></CreateChat>
           <div className="chat-list">
             {chatsAreSet 
               ? chats.map((chat) => {

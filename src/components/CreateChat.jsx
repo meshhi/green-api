@@ -13,7 +13,7 @@ const CreateChat = ({disabled, callback}) => {
         setModalOpen(true)
       }}
       >
-      CREATE
+      Создать новый чат
     </div>
     <Modal isOpen={modalOpen} onClose={setModalOpen} callback={callback}></Modal>
   </>

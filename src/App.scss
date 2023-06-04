@@ -85,6 +85,20 @@ $base-color: #eae6df;
   position: relative;
   flex-direction: column;
   background-color: $base-color;
+  overflow: scroll;
+}
+
+.chat-text-item {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	min-height: 20%;
+}
+
+.outgoing {
+	margin-left: 5rem;
+	background-color: grey;
 }
 
 .chat-content__input_message {

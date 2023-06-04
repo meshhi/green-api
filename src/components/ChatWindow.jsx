@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import ChatItem from "./ChatItem";
+import ChatTextItem from "./ChatTextItem";
 import CreateChat from "./CreateChat";
 import Loader from "./Loader";
 
@@ -46,6 +47,7 @@ const ChatWindow = () => {
           method: 'get',
         }
         const data = await axios(config);
+
         return data;
       } catch (err) {
         return Promise.reject(err);
@@ -86,9 +88,7 @@ const ChatWindow = () => {
           {chatContentIsSet
             ? chatContent.map((chat) => {
                 return(
-                  <div>
-                    {chat.type} {chat.textMessage}
-                  </div>
+                  <ChatTextItem key={chat.textMessage} type={chat.type} text={chat.textMessage}></ChatTextItem>
                 )
               })
             : <Loader></Loader>

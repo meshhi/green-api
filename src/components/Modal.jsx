@@ -12,19 +12,21 @@ const Modal =({ message, isOpen, onClose, children, callback })=> {
       }
     }}>
       <div className="modal-inner">
-        <button className="close-modal" onClick={() => onClose(prev => !prev)}>Close modal</button>
-        <label>
-          Введите номер контакта:
-          <input type="text" name="" id="" ref={contactRef}/>
-        </label>
-        <button onClick={() => {
-            const regex = /^([0-9])+?$/g;
-            if (contactRef.current.value.match(regex)) {
-              callback(contactRef.current.value);
-              onClose(prev => !prev);
-            };
-          }
-        }>Создать чат</button>
+        {/* <button className="close-modal" onClick={() => onClose(prev => !prev)}>Close modal</button> */}
+        <div className="create-chat-form">
+          <label>
+            Введите номер контакта:
+            <input type="text" name="" id="" ref={contactRef}/>
+          </label>
+          <button onClick={() => {
+              const regex = /^([0-9])+?$/g;
+              if (contactRef.current.value.match(regex)) {
+                callback(contactRef.current.value);
+                onClose(prev => !prev);
+              };
+            }
+          }>Создать чат</button>
+        </div>
       </div>
     </div>
     

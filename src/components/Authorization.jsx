@@ -14,14 +14,16 @@ const Authorization = () => {
     };
 
     return(
-        <div>
-            <input type="text" name="" id="" placeholder="token" ref={tokenRef}/>
-            <input type="text" name="" id="" placeholder="instance" ref={instanceRef}/>
-            <button onClick={setTokens}>Authorize</button>
-            <button onClick={() => {
-                localStorage.removeItem("token");
-                localStorage.removeItem("instance");
-            }}>Clear tokens</button>
+        <div className="auth">
+            <div className="inner-auth">
+                <input type="text" name="" id="" placeholder="token" ref={tokenRef}/>
+                <input type="text" name="" id="" placeholder="instance" ref={instanceRef}/>
+                <button onClick={setTokens}>Authorize</button>
+                <button onClick={() => {
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("instance");
+                }}>Clear tokens</button>
+            </div>
         </div>
     )
 };

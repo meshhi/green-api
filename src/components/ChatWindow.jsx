@@ -16,14 +16,13 @@ const ChatWindow = () => {
 
   const createNewChat = (contactId) => {
     setChats((prev) => [{ id: `${contactId}@c.us`, name: contactId }, ...prev]);
-    console.log('new chat added ' + contactId)
   };
 
-  const getChatContent = (chatId, msgCount = 100) => {
+  const getChatContent = async (chatId, msgCount = 100) => {
     const fetchChatContent = async() => {
       try {
         const config = {
-          url: `/waInstance${process.env.REACT_APP_GREEN_API_ID_INSTANCE}/getChatHistory/${process.env.REACT_APP_GREEN_API_TOKEN_INSTANCE}`,
+          url: `/waInstance${localStorage.getItem("instance")}/getChatHistory/${localStorage.getItem("token")}`,
           baseURL: process.env.REACT_APP_GREEN_API_URL,
           method: 'post',
           data: {
@@ -39,28 +38,28 @@ const ChatWindow = () => {
       }
     };
     setChatContentIsSet(false);
-    fetchChatContent()
-      .then(data => {
-        setChatContent(prev => {
-          return [...data.data]
-        })
-        setChatContentIsSet(true);
+    let data;
+    try {
+      data = await fetchChatContent();
+      setChatContent(prev => {
+        return [...data.data]
       })
-      .catch(err => {
-        setChatContent(prev => {
-          return [{
-            type: 'error',
-            textMessage: err.message
-          }]
-        })
-        setChatContentIsSet(true);
-      });
+    } catch(err) {
+      setChatContent(prev => {
+        return [{
+          type: 'error',
+          textMessage: err.message
+        }]
+      })
+    } finally {
+      setChatContentIsSet(true);
+    }
   };
   
   const sendMessageToChat = async() => {
     try {
       const config = {
-        url: `/waInstance${process.env.REACT_APP_GREEN_API_ID_INSTANCE}/sendMessage/${process.env.REACT_APP_GREEN_API_TOKEN_INSTANCE}`,
+        url: `/waInstance${localStorage.getItem("instance")}/sendMessage/${localStorage.getItem("token")}`,
         baseURL: process.env.REACT_APP_GREEN_API_URL,
         method: 'post',
         data: {
@@ -69,14 +68,17 @@ const ChatWindow = () => {
         },
       }
       const data = await axios(config);
-      getChatContent(currentChatId);
+      console.log('message sent')
+      console.log(data.data);
+      await getChatContent(currentChatId);
+      console.log('chat content received')
+      console.log(chatContent);
       return data;
     } catch (err) {
       setChatContent([{
         type: "error",
         textMessage: err.message
       }]);
-      // return Promise.reject(err);
     }
   };
 
@@ -85,7 +87,7 @@ const ChatWindow = () => {
     const fetchChats = async() => {
       try {
         const config = {
-          url: `/waInstance${process.env.REACT_APP_GREEN_API_ID_INSTANCE}/getChats/${process.env.REACT_APP_GREEN_API_TOKEN_INSTANCE}`,
+          url: `/waInstance${localStorage.getItem("instance")}/getChats/${localStorage.getItem("token")}`,
           baseURL: process.env.REACT_APP_GREEN_API_URL,
           method: 'get',
         }
@@ -133,8 +135,9 @@ const ChatWindow = () => {
           <div className="chat-content">
             {chatContentIsSet
               ? chatContent.map((chat) => {
+                console.log(chatContent)
                   return(
-                    <ChatTextItem key={chat.textMessage} type={chat.type} text={chat.textMessage}></ChatTextItem>
+                    <ChatTextItem key={chat.textMessage} type={chat.type} text={chat.textMessage} time={chat.timestamp}></ChatTextItem>
                   )
                 })
               : <Loader></Loader>

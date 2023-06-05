@@ -120,9 +120,10 @@ $msg_error: red;
 .chat-content {
 	flex: 9;
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
 	position: relative;
   // background-color: $base-color;
+	padding: 3rem;
   overflow: scroll;
 }
 
@@ -131,21 +132,28 @@ $msg_error: red;
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
+	max-width: 40%;
+	min-width: fit-content;
+	margin-top: 2%;
+	padding: 1rem;
 	// min-height: 20%;
 }
 
 .outgoing {
 	// margin-left: 5rem;
 	background-color: $msg_out;
+	align-self: end;
 }
 
 .incomming {
 	// margin-left: 5rem;
 	background-color: $msg_in;
+	align-self: start;
 }
 
 .error {
 	background-color: $msg_error;
+	right: 0;
 }
 
 .input_message {
@@ -208,6 +216,24 @@ $msg_error: red;
 
 .modal-inner button {
 	max-width: 300px;
+}
+
+.create-chat-form {
+	display: flex;
+	justify-content: center;
+}
+
+.inner-auth {
+	margin: 1rem auto;
+	width: fit-content;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.inner-auth > * {
+	margin-top: 1rem;
 }
 
 /* loader */

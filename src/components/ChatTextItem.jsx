@@ -1,6 +1,8 @@
-const ChatTextItem = ({text, type}) => {
+const ChatTextItem = ({text, type, time}) => {
   return(
-    <div className={`chat-text-item ${type}`}>{text}</div>
+    <div className={`chat-text-item ${type}`}>
+      {text}
+    </div>
   )
 }
 
